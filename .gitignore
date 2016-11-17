@@ -1,4 +1,4 @@
 // Currently ignore .c and .h files
-*.c
-*.h
+bluetooth/*.c
+bluetooth/*.h
 *.c.swp
