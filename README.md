@@ -8,3 +8,4 @@ CycleVision helps cyclists detect traffic on the road.
 * USB Webcam
 * BlueSMIRF Bluetooth Module
 * MPU-9150 Gyroscope
+* Android Smartphone
