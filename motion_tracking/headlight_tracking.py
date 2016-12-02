@@ -3,22 +3,27 @@ import cv2
 import glob
 import argparse 
 import imutils
+import time
 from collections import deque
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", required = True,
-	help = "Path to the image to be scanned")
+ap.add_argument("-v", "--video",
+	help = "Path to video file")
 args = vars(ap.parse_args())
+
+# load the video. If no video file is specified, 
+# grab from webcam
+if args.get("video", None) is None:
+	camera = cv2.VideoCapture(0)
+	time.sleep(0.25)
+else:
+	camera = cv2.VideoCapture(args["video"])
 
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
 maskLower = (0, 0, 255)
 maskUpper = (255, 255, 255)
-
-# load the video
-camera = cv2.VideoCapture(args["video"])
-
 
 while True:
 	# grab the current frame
