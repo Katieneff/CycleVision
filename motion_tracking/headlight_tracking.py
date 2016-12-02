@@ -19,7 +19,6 @@ args = vars(ap.parse_args())
 bluetooth = Bluetooth("/dev/ttyAMA0/", 115000)
 
 """
-
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
 maskLower = (0, 0, 255)
@@ -37,6 +36,8 @@ backBackLeftRangeY = (75, 275)
 
 backLeft = False
 backBackLeft = False
+
+
 
 # load the video
 camera = cv2.VideoCapture(args["video"])
