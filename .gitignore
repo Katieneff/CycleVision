@@ -2,3 +2,5 @@
 bluetooth/*.c
 bluetooth/*.h
 *.c.swp
+*.MP4
+*.mp4
