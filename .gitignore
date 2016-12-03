@@ -4,3 +4,14 @@ bluetooth/*.h
 *.c.swp
 *.MP4
 *.mp4
+
+
+
+// Android application
+*.gradle
+*.iml
+*.jar
+*.properties
+Android/build/*
+*.xml
+.DS_Store
