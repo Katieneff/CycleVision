@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/res/merged/debug/menu/bluetooth_cv.xml",
-        "source": "/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/src/main/res/menu/bluetooth_cv.xml"
+        "merged": "/home/katie/CycleVision/Android/Application/build/intermediates/res/merged/debug/menu/bluetooth_cv.xml",
+        "source": "/home/katie/CycleVision/Android/Application/src/main/res/menu/bluetooth_cv.xml"
     },
     {
-        "merged": "/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/res/merged/debug/menu/main.xml",
-        "source": "/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/src/main/res/menu/main.xml"
+        "merged": "/home/katie/CycleVision/Android/Application/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/home/katie/CycleVision/Android/Application/src/main/res/menu/main.xml"
     }
 ]

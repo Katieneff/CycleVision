@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="armeabi-v7a,armeabi"
-    api-level="22"
-    density="xhdpi"
+    api-level="23"
+    density="xxhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="8239698118472"
-    token="5817118356166136497"
-    verifier="FULL_BUILD_REQUESTED" >
+    timestamp="20402829319240"
+    token="-7135023581453664652"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
@@ -22,16 +22,22 @@
         name="verifier"
         duration="0" />
 
-    <artifact
-        location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/outputs/apk/Application-debug.apk"
-        type="MAIN" />
-
     <build
-        timestamp="17204051650037"
+        timestamp="19162316921809"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/outputs/apk/Application-debug.apk"
+            location="/home/katie/CycleVision/Android/Application/build/outputs/apk/Application-debug.apk"
             type="MAIN" />
     </build>
+    <build
+        timestamp="19504548040503"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="20402829319240"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

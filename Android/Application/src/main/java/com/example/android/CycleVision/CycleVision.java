@@ -82,7 +82,7 @@ public class CycleVision extends Fragment {
      */
     private CycleVisionService mChatService = null;
 
-    private StringBuilder inputMessage = new StringBuilder("    ");
+    private StringBuilder inputMessage = new StringBuilder();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -356,37 +356,49 @@ public class CycleVision extends Fragment {
             and do other things(?)
          */
             inputMessage.append(readMessage);
-            inputMessage.deleteCharAt(0);
+            //inputMessage.deleteCharAt(0);
+            System.out.println(inputMessage.toString());
 
-            // check if the starting character is the one that notifies start of string
-            if (Character.isLetter(inputMessage.charAt(0))) {
-                // update display
-                switch(Character.toLowerCase(inputMessage.charAt(0))) {
-                    case 'h':
-                        // update heart
-                        mHeartRate.setText("Heart Rate: " +inputMessage.substring(1, 4));
-                        break;
-                    case 's':
-                        // update speed
-                        mSpeed.setText("Speed: " +inputMessage.substring(1, 4));
-                        break;
-                    case 'c':
-                    case 'p':
-                        int active = Integer.parseInt(inputMessage.substring(1, 2));
-                        int x = Integer.parseInt(inputMessage.substring(2, 3));
-                        int y = Integer.parseInt(inputMessage.substring(3, 4));
-                        Button btn1 = mButtonArray[x][y];
-                        if (active == 1) {
-                            btn1.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
-                        } else if (active == 0) {
-                            btn1.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
-                        }
-                        break;
-                    default:
-                        break;
+            // update display
+            while(inputMessage.length() >=4) {
+
+                if (!Character.isLetter(inputMessage.charAt(0))) {
+                    inputMessage.deleteCharAt(0);
+                } else if (Character.isLetter(inputMessage.charAt(1))) {
+                    inputMessage.delete(0, 1);
+                } else if (Character.isLetter(inputMessage.charAt(2))) {
+                    inputMessage.delete(0, 2);
+                } else if (Character.isLetter(inputMessage.charAt(3))) {
+                    inputMessage.delete(0, 3);
+                } else { // check if the starting character is the one that notifies start of string
+
+                    switch(inputMessage.charAt(0)) {
+                        case 'h':
+                            // update heart
+                            mHeartRate.setText("Heart Rate: " +inputMessage.substring(1, 4));
+                            break;
+                        case 's':
+                            // update speed
+                            mSpeed.setText("Speed: " + inputMessage.substring(1, 4));
+                            break;
+                        case 'c':
+                        case 'p':
+                            int active = Integer.parseInt(inputMessage.substring(1, 2));
+                            int x = Integer.parseInt(inputMessage.substring(2, 3));
+                            int y = Integer.parseInt(inputMessage.substring(3, 4));
+                            Button btn1 = mButtonArray[x][y];
+                            if (active == 1) {
+                                btn1.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
+                            } else if (active == 0) {
+                                btn1.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    inputMessage.delete(0, 4);
+                    mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + inputMessage.toString());
                 }
-                mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + inputMessage.toString());
-
             }
         }
     };

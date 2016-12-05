@@ -5,8 +5,8 @@ import argparse
 import imutils
 import time
 from collections import deque
-#from bluetooth import Bluetooth
-
+from bluetooth import Bluetooth
+from gyro import Gyroscope
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -22,12 +22,12 @@ if args.get("video", None) is None:
 else:
 	camera = cv2.VideoCapture(args["video"])
 
-"""
+
 
 # Initialize and wait for pair
-bluetooth = Bluetooth("/dev/ttyAMA0/", 115000)
+bluetooth = Bluetooth("/dev/ttyUSB0", 115200)
 
-"""
+
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
 maskLower = (0, 0, 255)
@@ -110,19 +110,19 @@ while True:
 				# draw the circle and centroid on the frame
 				cv2.circle(orig, (int(x), int(y)), int(radius), (0, 255, 255), 2)
 				cv2.circle(orig, center, 5, (0, 0, 255), -1)
-
+		bluetooth.write("h202")
 		if backLeft:
 			print "back Left"
-			#bluetooth.write("1xx")
+			bluetooth.write("c101c111")
 		else:
 			print ""
-			#bluetooth.write("0xx")
+			bluetooth.write("c001c011")
 		if backBackLeft:
 			print "back back left"
-			#bluetooth.write("1xx")
+			bluetooth.write("c131c141")
 		else:
 			print ""
-			#bluetooth.write("0xx")
+			bluetooth.write("c031c041")
 
 		# show the frame to our screen
 		cv2.imshow("Headlights", orig)
