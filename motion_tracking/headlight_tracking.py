@@ -30,8 +30,8 @@ bluetooth = Bluetooth("/dev/ttyAMA0/", 115000)
 """
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
-maskLower = (0, 0, 255)
-maskUpper = (255, 255, 255)
+maskLower = (0, 0, 230)
+maskUpper = (255, 0, 255)
 
 # Range of locations for cars. 
 # backLeft is the blindspot area around 7 o'clock
