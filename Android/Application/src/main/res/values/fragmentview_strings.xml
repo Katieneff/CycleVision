@@ -1,0 +1,4 @@
+<resources>
+    <string name="sample_show_log">Show Graphs</string>
+    <string name="sample_hide_log">Hide Graphs</string>
+</resources>

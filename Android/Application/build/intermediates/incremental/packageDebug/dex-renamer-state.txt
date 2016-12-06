@@ -1,0 +1,7 @@
+#Sun Dec 04 18:46:06 PST 2016
+base.0=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f5dc769c45e98f6769003acfb4d3a8c1d8253341
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3558989735a5a2ce49a9eaebe5a2a86c3dd08dc2/classes.dex
+base.1=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3558989735a5a2ce49a9eaebe5a2a86c3dd08dc2
+file.0=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f5dc769c45e98f6769003acfb4d3a8c1d8253341/classes.dex

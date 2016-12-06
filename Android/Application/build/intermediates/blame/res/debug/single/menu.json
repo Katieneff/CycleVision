@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/katie/CycleVision/Android/Application/build/intermediates/res/merged/debug/menu/bluetooth_cv.xml",
+        "source": "/home/katie/CycleVision/Android/Application/src/main/res/menu/bluetooth_cv.xml"
+    },
+    {
+        "merged": "/home/katie/CycleVision/Android/Application/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/home/katie/CycleVision/Android/Application/src/main/res/menu/main.xml"
+    }
+]

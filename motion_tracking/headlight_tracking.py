@@ -6,7 +6,7 @@ import imutils
 import time
 from collections import deque
 from bluetooth import Bluetooth
-from gyro import Gyroscope
+#from gyro import Gyroscope
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -21,7 +21,6 @@ if args.get("video", None) is None:
 	time.sleep(0.25)
 else:
 	camera = cv2.VideoCapture(args["video"])
-
 
 
 # Initialize Bluetooth
@@ -48,6 +47,11 @@ backBackLeftRangeY = (75, 275)
 backLeft = False
 backBackLeft = False
 
+flag1 = False
+flag2 = False
+
+sendSignalBackLeft = False
+sendSignalBackBackLeft = False
 while True:
 	backLeft = False
 	backbackLeft = False
@@ -57,7 +61,7 @@ while True:
 	# if we are viewing a video and we did not grab a frame,
 	# then we have reached the end of the video
 	if args.get("video") and not grabbed:
-		break
+		continue
 		
  	# Resize for faster processing
 	orig = imutils.resize(orig, width=600)
@@ -112,27 +116,29 @@ while True:
 				cv2.circle(orig, (int(x), int(y)), int(radius), (0, 255, 255), 2)
 				cv2.circle(orig, center, 5, (0, 0, 255), -1)
 		
-		
-		gyroRead = gyro.read()
-		print gyroRead
-		#bluetooth.write("h202")
-		if backLeft:
-			print "back Left"
-			# If rider starts turning when there's a car behind them, send warning signal
-			if gyroRead < 240:
-				print "DANGER" 
-			bluetooth.write("c101c111")
-		else:
-			print ""
-			bluetooth.write("c001c011")
-		if backBackLeft:
-			print "back back left"
-			bluetooth.write("c131c141")
-		else:
-			print ""
-			bluetooth.write("c031c041")
+		if backLeft != flag1:
+			flag1 = backLeft
+			sendSignalBackLeft = True
+		if backBackLeft != flag2:
+			flag2 = backBackLeft
+			sendSignalBackBackLeft = True
 
-		
+		if backLeft and sendSignalBackLeft:
+			print "back Left"
+			bluetooth.write("c121c131c122c132")
+			sendSignalBackLeft = False
+		elif not backLeft and sendSignalBackLeft:
+			print ""
+			bluetooth.write("c021c031c022c032")
+			sendSignalBackLeft = False
+		if backBackLeft and sendSignalBackBackLeft:
+			print "back back left"
+			bluetooth.write("c124c134")
+			sendSignalBackBackLeft = False
+		elif not backBackLeft and sendSignalBackBackLeft:
+			print ""
+			bluetooth.write("c034c024")
+			sendSignalBackBackLeft = False
 
 		# show the frame to our screen
 		cv2.imshow("Headlights", orig)
@@ -145,6 +151,6 @@ while True:
  
 # cleanup the camera and close any open windows
 camera.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindowsa()
 
 
