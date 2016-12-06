@@ -4,3 +4,8 @@ bluetooth/*.h
 *.c.swp
 *.MP4
 *.mp4
+
+
+*.swp
+*.pyc
+
