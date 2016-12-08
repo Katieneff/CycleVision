@@ -6,8 +6,8 @@ import imutils
 import time
 from collections import deque
 from bluetooth import Bluetooth
-#from gyro import Gyroscope
-
+from gyro import Gyroscope
+from speedometer import Speedometer
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video",
@@ -28,6 +28,9 @@ else:
 bluetooth = Bluetooth("/dev/ttyAMA0", 115200) # for raspi
 # Initialize gyroscope
 gyro = Gyroscope()
+
+# Initialize speedometer
+speedometer = Speedometer(6, 22)
 
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
@@ -142,7 +145,7 @@ while True:
 
 		# show the frame to our screen
 		cv2.imshow("Headlights", orig)
- 	
+ 	print speedometer.getSpeed()
 	key = cv2.waitKey(1) & 0xFF
  
 	# if the 'q' key is pressed, stop the loop
