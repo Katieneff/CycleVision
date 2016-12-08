@@ -1,0 +1,2 @@
+20mph / (3600s/hr) * (5280ft/mi) * (12in/ft) / (24in*pi) = (Yrev/s)
+(Xmph) = (Yrev/s) * (24in*pi) / (12in/ft) * (3600s/hr) / (5280ft/mi) 
