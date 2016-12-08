@@ -7,6 +7,9 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,12 +36,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.graphics.PorterDuff;
-
+import android.util.TypedValue;
+import android.media.ToneGenerator;
+import android.os.Vibrator;
 
 
 import com.example.android.common.logger.Log;
 
 import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 public class CycleVision extends Fragment {
 
@@ -82,7 +89,7 @@ public class CycleVision extends Fragment {
      */
     private CycleVisionService mChatService = null;
 
-    private StringBuilder inputMessage = new StringBuilder();
+    private StringBuilder inputMessage = new StringBuilder("    ");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -155,20 +162,20 @@ public class CycleVision extends Fragment {
         mGrid = (GridLayout) view.findViewById(R.id.viewGrid);
         // add 2D array of buttons
         mGrid.removeAllViews();
-        mButtonArray = new Button[15][15];
+        mButtonArray = new Button[5][5];
         Context cntxt = view.getContext();
         DisplayMetrics metrics = new DisplayMetrics();
         ((Activity)cntxt).getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        SCREEN_WIDTH = metrics.widthPixels/15;
+        SCREEN_WIDTH = metrics.widthPixels/5;
 
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 Button btn1 = new Button(cntxt);
                 btn1.setMinimumWidth(0);
                 btn1.setMinimumHeight(0);
                 btn1.setMinWidth(SCREEN_WIDTH);
-                btn1.setMinHeight(65);
+                btn1.setMinHeight(180);
                 btn1.setPadding(0,0,0,0);
                 btn1.setEnabled(false);
                 btn1.setId(i*j);
@@ -180,11 +187,8 @@ public class CycleVision extends Fragment {
             }
         }
 
-        Button User1 = mButtonArray[1][13];
-        Button User2 = mButtonArray[2][13];
-
+        Button User1 = mButtonArray[0][4];
         User1.getBackground().setColorFilter(Color.BLUE,PorterDuff.Mode.MULTIPLY);
-        User2.getBackground().setColorFilter(Color.BLUE,PorterDuff.Mode.MULTIPLY);
 
 
 
@@ -329,7 +333,7 @@ public class CycleVision extends Fragment {
                     byte[] readBuf = (byte[]) msg.obj;
                     // construct a string from the valid bytes in the buffer
                     String readMessage = new String(readBuf, 0, msg.arg1);
-                    processString(readMessage);
+                    processString(readMessage, getContext());
                     break;
                 case Constants.MESSAGE_DEVICE_NAME:
                     // save the connected device's name
@@ -350,7 +354,7 @@ public class CycleVision extends Fragment {
             }
         }
 
-        public void processString(String readMessage) {
+        public void processString(String readMessage, Context cntx) {
         /*
             Take input character; update instance attribute;
             and do other things(?)
@@ -375,24 +379,37 @@ public class CycleVision extends Fragment {
                     switch(inputMessage.charAt(0)) {
                         case 'h':
                             // update heart
-                            mHeartRate.setText("Heart Rate: " +inputMessage.substring(1, 4));
+                            mHeartRate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                            mHeartRate.setText("Heart Rate: " + inputMessage.substring(1, 4) + " BPM");
                             break;
                         case 's':
                             // update speed
-                            mSpeed.setText("Speed: " + inputMessage.substring(1, 4));
+                            mSpeed.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+                            mSpeed.setText("Speed: " + inputMessage.substring(2, 4) + " mph");
                             break;
                         case 'c':
                         case 'p':
                             int active = Integer.parseInt(inputMessage.substring(1, 2));
                             int x = Integer.parseInt(inputMessage.substring(2, 3));
                             int y = Integer.parseInt(inputMessage.substring(3, 4));
-                            Button btn1 = mButtonArray[x][y];
-                            if (active == 1) {
-                                btn1.getBackground().setColorFilter(Color.RED,PorterDuff.Mode.MULTIPLY);
-                            } else if (active == 0) {
-                                btn1.getBackground().setColorFilter(Color.LTGRAY,PorterDuff.Mode.MULTIPLY);
+                            //mHeartRate.setText("Heart Rate: " +inputMessage.substring(2, 3) + " "  + inputMessage.substring(3, 4));
+                            if (x >= 2 && y >= 1) {
+                                Button btn1 = mButtonArray[y][x];
+                                if (active == 1) {
+                                    btn1.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                                } else if (active == 0) {
+                                    btn1.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
+                                }
                             }
                             break;
+                        case 'w':
+                            final ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 20); //volume 40
+                            tg.startTone(ToneGenerator.TONE_DTMF_S, 2000);
+                            Toast.makeText(getActivity(), "Careful when turning! Car on your left!",
+                                    Toast.LENGTH_LONG).show();
+                            Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                            v.vibrate(1000);
+
                         default:
                             break;
                     }

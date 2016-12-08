@@ -1,7 +1,7 @@
-#Sun Dec 04 18:46:06 PST 2016
-base.0=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f5dc769c45e98f6769003acfb4d3a8c1d8253341
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3558989735a5a2ce49a9eaebe5a2a86c3dd08dc2/classes.dex
-base.1=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3558989735a5a2ce49a9eaebe5a2a86c3dd08dc2
-file.0=/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f5dc769c45e98f6769003acfb4d3a8c1d8253341/classes.dex
+#Tue Dec 06 16:10:15 PST 2016
+base.0=/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_4b66958b05d222a24bab0cdd86b57c93eb9afde0
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_be049f79c3a21161ddf8ee747b5e03e3d8602ab7/classes.dex
+base.1=/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_be049f79c3a21161ddf8ee747b5e03e3d8602ab7
+file.0=/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_4b66958b05d222a24bab0cdd86b57c93eb9afde0/classes.dex

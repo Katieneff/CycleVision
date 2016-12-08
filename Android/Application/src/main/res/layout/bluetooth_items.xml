@@ -23,21 +23,21 @@
         <TextView
             android:id="@+id/heartrate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="heartrate"
             android:textSize="30sp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.47"
             android:gravity="center"/>
         />
 
         <TextView
             android:id="@+id/speed"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:text="speed"
             android:textSize="30sp"
-            android:layout_weight="0.50"
+            android:layout_weight="0.47"
             android:gravity="center"/>
         />
     </LinearLayout>
@@ -50,8 +50,8 @@
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/viewGrid"
             android:layout_width="wrap_content"
-            android:columnCount="15"
-            android:rowCount="15"
+            android:columnCount="5"
+            android:rowCount="5"
             android:orientation="horizontal"
             android:layout_height="463dp">
         </GridLayout>

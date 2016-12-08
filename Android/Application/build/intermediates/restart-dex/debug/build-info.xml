@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="armeabi-v7a,armeabi"
-    api-level="23"
-    density="xxhdpi"
+    api-level="22"
+    density="xhdpi"
     format="8"
     plugin-version="2.2.2"
-    timestamp="20402829319240"
-    token="-7135023581453664652"
+    timestamp="10292283692928"
+    token="5817118356166136497"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="389" />
     <task
         name="instant-run-dex"
         duration="0" />
@@ -22,22 +22,37 @@
         name="verifier"
         duration="0" />
 
+    <artifact
+        location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+        type="DEX" />
+
     <build
-        timestamp="19162316921809"
+        timestamp="9859326360413"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/home/katie/CycleVision/Android/Application/build/outputs/apk/Application-debug.apk"
+            location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/outputs/apk/Application-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="19504548040503"
+        timestamp="10141422130168"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/reload-dex/debug/classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="10292283692928"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="/home/katie/CycleVision/Android/Application/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
             type="DEX" />
     </build>
     <build
-        timestamp="20402829319240"
-        verifier="COLD_SWAP_REQUESTED" />
+        timestamp="19162275534003"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="/Users/vishesh/Android/Cycle-Vision-Android-Application copy/Application/build/outputs/apk/Application-debug.apk"
+            type="MAIN" />
+    </build>
 
 </instant-run>
