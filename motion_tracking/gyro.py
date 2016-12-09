@@ -1,6 +1,6 @@
 from smbus import SMBus
 
-class Gyroscope:
+class Gyroscope(object):
 	
 	def __init__(self):
 		self.bus = SMBus(1)

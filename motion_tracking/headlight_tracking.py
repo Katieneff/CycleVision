@@ -145,7 +145,18 @@ while True:
 
 		# show the frame to our screen
 		cv2.imshow("Headlights", orig)
- 	print speedometer.getSpeed()
+
+
+        # Send heart rate to phone
+        bluetooth.write("H099")
+        
+        # Send speed to phone
+	speed = str(int(speedometer.getSpeed()))
+	
+	while len(speed) < 3:
+                speed = "0" + speed
+	bluetooth.write("S" + speed)
+ 	
 	key = cv2.waitKey(1) & 0xFF
  
 	# if the 'q' key is pressed, stop the loop

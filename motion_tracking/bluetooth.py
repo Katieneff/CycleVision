@@ -1,15 +1,14 @@
-"""
-A Bluetooth wrapper class that uses the serial library of python
-to communicate with the BlueSMIRF bluetooth module
-"""
-
 import serial
 
 class Bluetooth(object):
-	
-	def __init__(self, devFile, baudrate):
-		self.ser = serial.Serial(devFile)
-		self.ser.baudrate = baudrate
+	"""
+	A Bluetooth wrapper class that uses the serial library of python
+	to communicate with the BlueSMIRF bluetooth module
+	"""
+
+	def __init__(self, devFile, baud):
+		self.ser = serial.Serial(port=devFile,
+                                         baudrate=baud)
 		
 		# Wait for pairing connection
 	#	while True:
@@ -19,8 +18,10 @@ class Bluetooth(object):
 		
 	
 	def write(self, command):
-		self.ser.write(command)
-
+                try:
+                        self.ser.write(command)
+                except serial.serialutil.SerialException:
+                        print "Write failed. Continuing."
 	
 	def close(self):
 		self.ser.close()
