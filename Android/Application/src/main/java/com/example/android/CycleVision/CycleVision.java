@@ -39,6 +39,7 @@ import android.graphics.PorterDuff;
 import android.util.TypedValue;
 import android.media.ToneGenerator;
 import android.os.Vibrator;
+import java.lang.Character;
 
 
 import com.example.android.common.logger.Log;
@@ -355,12 +356,8 @@ public class CycleVision extends Fragment {
         }
 
         public void processString(String readMessage, Context cntx) {
-        /*
-            Take input character; update instance attribute;
-            and do other things(?)
-         */
+
             inputMessage.append(readMessage);
-            //inputMessage.deleteCharAt(0);
             System.out.println(inputMessage.toString());
 
             // update display
@@ -376,7 +373,7 @@ public class CycleVision extends Fragment {
                     inputMessage.delete(0, 3);
                 } else { // check if the starting character is the one that notifies start of string
 
-                    switch(inputMessage.charAt(0)) {
+                    switch(Character.toLowerCase(inputMessage.charAt(0))) {
                         case 'h':
                             // update heart
                             mHeartRate.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
