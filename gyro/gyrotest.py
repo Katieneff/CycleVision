@@ -10,7 +10,7 @@ while True:
 		# Read x-plane value from accelerometer
 		x = bus.read_i2c_block_data(addr, 0x3B, 4)
 		# Prints unsigned byte value of reading
-		print x[0]
+		print x
 		
 	except:
 		print 'exiting...'

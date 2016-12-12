@@ -18,8 +18,6 @@ class Heartrate(object):
         self.heartrate = Value('d', 0.0)
         self.heartrate.value = 0.0
         self.measurements = deque([0], self.NUM_READINGS)
-        
-
         # Open SPI device 0
         self.spi = spi.SPI("/dev/spidev0.0")
 
@@ -29,12 +27,16 @@ class Heartrate(object):
         t.start()
         self.monitorThread = t
 
-
+    """ Returns the current heartrate as a rounded integer
+    """
     def getHeartrate(self):
         # 4 is a fudge factor; sensor triggers multiple times per beat
-        return self.heartrate.value / 4
-        
-    def monitorHeartrate(self):
+        return int(self.heartrate.value / 4)
+
+    """ Monitors the heart rate sensor input and computes the riders'
+        beats per minute (BPM)
+    """
+    def monitorHeartrate(self):                
         delay = self.SHORT_DELAY
         cutoffMSD = 4
         cutoffLSD = 10
@@ -45,18 +47,15 @@ class Heartrate(object):
         while True:
             time.sleep(delay)
             currentIn = self.spi.transfer([0x1, 0x8, 0x0])
-            #print currentIn
             # Detect start of heartbeat
             if (currentIn[1] == 0 and currentIn[2] < cutoffLSD
                 and prevIn[1] > cutoffMSD):
-		print "first if"
                 startTime = time.time()
                 prevIn = currentIn
                 delay = self.SHORT_DELAY
             # Detect end of heartbeat
             elif (currentIn[1] > cutoffMSD
                   and prevIn[1] == 0 and prevIn[2] < cutoffLSD):
-                print "second if"
 		endTime = time.time()
                 prevIn = currentIn
                 delay = self.LONG_DELAY
@@ -65,9 +64,10 @@ class Heartrate(object):
 		print len(self.measurements)
                 # Set new heartrate only after min number of readings have been taken
                 if (len(self.measurements) == self.NUM_READINGS):
-		    print "update heartrate"			
                	    self.heartrate.value = self.queueAverage()
-            
+
+    """ Returns the average of the most recent measurements
+    """
     def queueAverage(self):
         average = 0
         for rate in self.measurements:

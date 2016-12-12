@@ -36,7 +36,7 @@ class Speedometer(object):
         return self.speed.value
         
     def monitorSpeedometer(self):
-        self.prevIn = GPIO.input(self.channelNum)
+        prevIn = GPIO.input(self.channelNum)
         prevTime = time.time()
 
         # Poll the speed sensor continually

@@ -7,7 +7,9 @@ import time
 from collections import deque
 from bluetooth import Bluetooth
 from gyro import Gyroscope
+from heartrate import Heartrate
 from speedometer import Speedometer
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-v", "--video",
@@ -29,8 +31,11 @@ bluetooth = Bluetooth("/dev/ttyAMA0", 115200) # for raspi
 # Initialize gyroscope
 gyro = Gyroscope()
 
+# Initialize heartrate
+heartrate = Heartrate()
+
 # Initialize speedometer
-speedometer = Speedometer(6, 22)
+speedometer = Speedometer(20, 28)
 
 # define the lower and upper boundaries of the headlights
 # in the HSV color space
@@ -145,25 +150,26 @@ while True:
 	
 	# show the frame to our screen
 	cv2.imshow("Headlights", orig)
-
-
-        # Send heart rate to phone
-        #bluetooth.write("H099")
         
-        # Send speed to phone
-	speed = str(int(speedometer.getSpeed()))
-	
+	# Send gyroscope reading to phone
 	gyroread = gyro.read()
-	print gyroread
-	
+	print "Gyroscope: " + str(gyroread)
 	if backLeft and gyroread < 240 and gyroread > 220:
 		bluetooth.write("w000")
 
+        # Send heart rate to phone
+        hr = str(int(heartrate.getHeartrate()))
+	while len(hr) < 3:
+                hr = "0" + hr
+        bluetooth.write("H" + hr)
+        print "Heartrate: " + hr
 
+        # Send speed to phone
+	speed = str(int(speedometer.getSpeed()))
 	while len(speed) < 3:
                 speed = "0" + speed
 	bluetooth.write("S" + speed)
-	print speed
+	print "Speed: " + speed
  	
 	key = cv2.waitKey(1) & 0xFF
  
