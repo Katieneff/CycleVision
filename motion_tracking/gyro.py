@@ -9,5 +9,6 @@ class Gyroscope(object):
 
 
 	def read(self):
+		""" Returns Z value of gyroscope"""
 		x = self.bus.read_i2c_block_data(self.addr, 0x3B, 4)
-		return x[0]
+		return x[2]
