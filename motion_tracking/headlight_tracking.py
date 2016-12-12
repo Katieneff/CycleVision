@@ -118,7 +118,6 @@ while True:
 				# draw the circle and centroid on the frame
 				cv2.circle(orig, (int(x), int(y)), int(radius), (0, 255, 255), 2)
 				cv2.circle(orig, center, 5, (0, 0, 255), -1)
-		
 		if backLeft != flag1:
 			flag1 = backLeft
 			sendSignalBackLeft = True
@@ -127,19 +126,19 @@ while True:
 			sendSignalBackBackLeft = True
 
 		if backLeft and sendSignalBackLeft:
-			print "back Left"
+			#print "back Left"
 			bluetooth.write("c121c131c122c132")
 			sendSignalBackLeft = False
 		elif not backLeft and sendSignalBackLeft:
-			print ""
+			#print ""
 			bluetooth.write("c021c031c022c032")
 			sendSignalBackLeft = False
 		if backBackLeft and sendSignalBackBackLeft:
-			print "back back left"
+			#print "back back left"
 			bluetooth.write("c124c134")
 			sendSignalBackBackLeft = False
 		elif not backBackLeft and sendSignalBackBackLeft:
-			print ""
+			print "no car back"
 			bluetooth.write("c034c024")
 			sendSignalBackBackLeft = False
 
@@ -148,14 +147,24 @@ while True:
 
 
         # Send heart rate to phone
-        bluetooth.write("H099")
+        #bluetooth.write("H099")
         
         # Send speed to phone
 	speed = str(int(speedometer.getSpeed()))
 	
+	gyroread = gyro.read()
+	print gyroread
+	
+	if backLeft and gyroread > 16:
+		bluetooth.write("w000")
+
+	
+
+
 	while len(speed) < 3:
                 speed = "0" + speed
 	bluetooth.write("S" + speed)
+	print speed
  	
 	key = cv2.waitKey(1) & 0xFF
  
