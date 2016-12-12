@@ -156,7 +156,7 @@ while True:
 	gyroread = gyro.read()
 	print gyroread
 	
-	if backLeft and gyroread > 16 and gyroread < 60:
+	if backLeft and gyroread < 240 and gyroread > 220:
 		bluetooth.write("w000")
 
 
