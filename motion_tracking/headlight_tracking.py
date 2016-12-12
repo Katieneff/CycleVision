@@ -57,7 +57,7 @@ sendSignalBackLeft = False
 sendSignalBackBackLeft = False
 while True:
 	backLeft = False
-	backbackLeft = False
+	backBackLeft = False
 	# grab the current frame
 	(grabbed, orig) = camera.read()
  
@@ -68,6 +68,7 @@ while True:
 		
  	# Resize for faster processing
 	orig = imutils.resize(orig, width=600)
+
 
 	# Convert to HSV color to find headlights
 	hsv = cv2.cvtColor(orig, cv2.COLOR_BGR2HSV)
@@ -84,7 +85,7 @@ while True:
 	center = None
 	contours = orig.copy()
 	cv2.drawContours(contours, cnts, -1, (0,255,0), 3)
-	cv2.imshow("Contours", contours)
+	#cv2.imshow("Contours", contours)
 
 	# only proceed if at least one contour was found
 	if len(cnts) > 0:
@@ -118,32 +119,32 @@ while True:
 				# draw the circle and centroid on the frame
 				cv2.circle(orig, (int(x), int(y)), int(radius), (0, 255, 255), 2)
 				cv2.circle(orig, center, 5, (0, 0, 255), -1)
-		if backLeft != flag1:
-			flag1 = backLeft
-			sendSignalBackLeft = True
-		if backBackLeft != flag2:
-			flag2 = backBackLeft
-			sendSignalBackBackLeft = True
+	if backLeft != flag1:
+		flag1 = backLeft
+		sendSignalBackLeft = True
+	if backBackLeft != flag2:
+		flag2 = backBackLeft
+		sendSignalBackBackLeft = True
 
-		if backLeft and sendSignalBackLeft:
-			#print "back Left"
-			bluetooth.write("c121c131c122c132")
-			sendSignalBackLeft = False
-		elif not backLeft and sendSignalBackLeft:
-			#print ""
-			bluetooth.write("c021c031c022c032")
-			sendSignalBackLeft = False
-		if backBackLeft and sendSignalBackBackLeft:
-			#print "back back left"
-			bluetooth.write("c124c134")
-			sendSignalBackBackLeft = False
-		elif not backBackLeft and sendSignalBackBackLeft:
-			print "no car back"
-			bluetooth.write("c034c024")
-			sendSignalBackBackLeft = False
-
-		# show the frame to our screen
-		cv2.imshow("Headlights", orig)
+	if backLeft and sendSignalBackLeft:
+		print "back Left"
+		bluetooth.write("c121c131c122c132")
+		sendSignalBackLeft = False
+	elif not backLeft and sendSignalBackLeft:
+		print ""
+		bluetooth.write("c021c031c022c032")
+		sendSignalBackLeft = False
+	if backBackLeft and sendSignalBackBackLeft:
+		print "back back left"
+		bluetooth.write("c124c134")
+		sendSignalBackBackLeft = False
+	elif not backBackLeft and sendSignalBackBackLeft:
+		print "no car back"
+		bluetooth.write("c034c024")
+		sendSignalBackBackLeft = False
+	
+	# show the frame to our screen
+	cv2.imshow("Headlights", orig)
 
 
         # Send heart rate to phone
@@ -155,10 +156,8 @@ while True:
 	gyroread = gyro.read()
 	print gyroread
 	
-	if backLeft and gyroread > 16:
+	if backLeft and gyroread > 16 and gyroread < 60:
 		bluetooth.write("w000")
-
-	
 
 
 	while len(speed) < 3:
@@ -174,6 +173,6 @@ while True:
  
 # cleanup the camera and close any open windows
 camera.release()
-cv2.destroyAllWindowsa()
+cv2.destroyAllWindows()
 
 
