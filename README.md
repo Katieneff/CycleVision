@@ -12,4 +12,4 @@ CycleVision helps cyclists detect traffic on the road and advises them of potent
 
 ## Demo Video
 
-[linkname]https://youtu.be/4P6h-kW7VgE
+https://youtu.be/4P6h-kW7VgE
