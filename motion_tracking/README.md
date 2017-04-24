@@ -1,4 +1,4 @@
-#Headlight Tracking
+# Headlight Tracking
 
 This program tracks the headlights of a car using OpenCV. The program is run with a test video.
 
