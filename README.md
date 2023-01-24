@@ -9,7 +9,3 @@ CycleVision helps cyclists detect traffic on the road and advises them of potent
 * BlueSMIRF Bluetooth Module
 * MPU-9150 Gyroscope
 * Android Smartphone
-
-## Demo Video
-
-https://youtu.be/4P6h-kW7VgE
